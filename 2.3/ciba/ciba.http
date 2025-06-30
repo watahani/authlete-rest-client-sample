@@ -3,8 +3,8 @@
 ###
 # @name processCIBARequest
 # https://docs.authlete.com/en/shared/latest#post-/api/-serviceId-/backchannel/authentication
-POST {{baseUrl}}/api/{{serviceId}}/backchannel/authentication
-Authorization: Bearer {{serviceAccessToken}}
+POST {{baseUrl}}/api/backchannel/authentication
+Authorization: Basic {{apiKey}}:{{apiSecret}}
 Content-Type: application/json
 
 {
@@ -16,19 +16,21 @@ Content-Type: application/json
 ###
 # @name issueCIBAAuthenctication
 # https://docs.authlete.com/en/shared/latest#post-/api/-serviceId-/backchannel/authentication/issue
-POST {{baseUrl}}/api/{{serviceId}}/backchannel/authentication/issue
-Authorization: Bearer {{serviceAccessToken}}
+POST {{baseUrl}}/api/backchannel/authentication/issue
+Authorization: Basic {{apiKey}}:{{apiSecret}}
 Content-Type: application/json
+
 
 {
     "ticket": "{{processCIBARequest.response.body.ticket}}"
 }
 
 ###
-# @name completeCIBAAuthenticationRequest
+# @name completeCIBAAuthentication
 # https://docs.authlete.com/en/shared/latest#post-/api/-serviceId-/backchannel/authentication/complete
-POST {{baseUrl}}/api/{{serviceId}}/backchannel/authentication/complete
-Authorization: Bearer {{serviceAccessToken}}
+###
+POST {{baseUrl}}/api/backchannel/authentication/complete
+Authorization: Basic {{apiKey}}:{{apiSecret}}
 Content-Type: application/json
 
 { 
@@ -37,14 +39,15 @@ Content-Type: application/json
     "subject": "john" 
 }
 
+
 ###
 # @name failCIBAAuthenticationRequest
 # https://docs.authlete.com/en/shared/latest#post-/api/-serviceId-/backchannel/authentication/complete
 # 
 # The reason of the failure of the backchannel authentication request. This request parameter is not mandatory but optional. However, giving this parameter is recommended. If omitted, SERVER_ERROR is used as a reason.
 # Allowed: ACCESS_DENIED┃EXPIRED_LOGIN_HINT_TOKEN┃INVALID_BINDING_MESSAGE┃INVALID_TARGET┃INVALID_USER_CODE┃MISSING_USER_CODE┃SERVER_ERROR┃UNAUTHORIZED_CLIENT┃UNKNOWN_USER_ID
-POST {{baseUrl}}/api/{{serviceId}}/backchannel/authentication/fail
-Authorization: Bearer {{serviceAccessToken}}
+POST {{baseUrl}}/api/backchannel/authentication/fail
+Authorization: Basic {{apiKey}}:{{apiSecret}}
 Content-Type: application/json
 
 { 
@@ -55,8 +58,8 @@ Content-Type: application/json
 ###
 # @name tokenRequest
 # If you use the CIBA flow with Poll mode, you can use the following request to get the access token.
-POST {{baseUrl}}/api/{{serviceId}}/auth/token
-Authorization: Bearer {{serviceAccessToken}}
+POST {{baseUrl}}/api/auth/token
+Authorization: Basic {{apiKey}}:{{apiSecret}}
 Content-Type: application/json
 
 { 
